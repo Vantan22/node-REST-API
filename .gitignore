@@ -1,2 +1,4 @@
-node_modules
+sever/node_modules
+client/node_modules
+../.idea
 .idea
