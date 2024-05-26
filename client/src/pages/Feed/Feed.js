@@ -53,30 +53,30 @@ class Feed extends Component {
       page--;
       this.setState({ postPage: page });
     }
-  fetch("http://localhost:8080/feed/posts?page=" + page, {
-    headers: {
-      Authorization: "Bearer " + this.props.token,
-    },
-  })
-    .then((res) => {
-      if (res.status !== 200) {
-        throw new Error("Failed to fetch posts.");
-      }
-      return res.json();
+    fetch("http://localhost:8080/feed/posts?page=" + page, {
+      headers: {
+        Authorization: "Bearer " + this.props.token,
+      },
     })
-    .then((resData) => {
-      this.setState({
-        posts: resData.posts.map((post) => {
-          return {
-            ...post,
-            imagePath: post.imageUrl,
-          };
-        }),
-        totalPosts: resData.totalItems,
-        postsLoading: false,
-      });
-    })
-    .catch(this.catchError);
+      .then((res) => {
+        if (res.status !== 200) {
+          throw new Error("Failed to fetch posts.");
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        this.setState({
+          posts: resData.posts.map((post) => {
+            return {
+              ...post,
+              imagePath: post.imageUrl,
+            };
+          }),
+          totalPosts: resData.totalItems,
+          postsLoading: false,
+        });
+      })
+      .catch(this.catchError);
   };
 
   statusUpdateHandler = (event) => {
@@ -186,13 +186,15 @@ class Feed extends Component {
     this.setState({ status: value });
   };
 
-deletePostHand'http://localhost:8080/feed/post/'ate({postsLoading: true})'DELETE'h("http://localhost:8080/feed/post/" +'Bearer '{
-    method: "DELETE",
-    headers: {
-      Authorization: "Bearer " + this.props.token,
-    },
-  }).then((res) =>
-  {
+  deletePostHandler = (postId) => {
+    this.setState({ postsLoading: true });
+    fetch("http://localhost:8080/feed/post/" + postId, {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + this.props.token,
+      },
+    })
+      .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
           throw new Error("Deleting a post failed!");
         }
