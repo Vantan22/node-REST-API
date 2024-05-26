@@ -19,7 +19,7 @@ router.post(
   feedController.createPost,
 );
 
-router.get("/'/post/:postId'auth, feedController.getPost);
+router.get("/post/:postId", auth, feedController.getPost);
 
 router.put(
   "/post/:postId",
@@ -27,7 +27,7 @@ router.put(
     body("title").trim().isLength({ min: 5 }),
     body("content").trim().isLength({ min: 5 }),
   ],
-    auth,
+  auth,
   feedController.updatePost,
 );
 

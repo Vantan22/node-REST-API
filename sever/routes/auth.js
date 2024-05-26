@@ -25,6 +25,6 @@ router.put(
   signup,
 );
 
-router.post("/log'/login'in);
+router.post("/login", login);
 
 module.exports = router;
