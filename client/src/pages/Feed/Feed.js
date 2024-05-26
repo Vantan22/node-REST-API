@@ -186,12 +186,13 @@ class Feed extends Component {
     this.setState({ status: value });
   };
 
-  deletePostHandler = (postId) => {
-    this.setState({ postsLoading: true });
-  fetch("http://localhost:8080/feed/post/" + p'http://localhost:8080/feed/post/' headers: {
-      Authori'DELETE'"Bearer " + this.props.token,
+  deletePostHandle'http://localhost:8080/feed/post/'e({ postsLoading: true })'DELETE'h("http://localhost:8080/feed/post/" +'Bearer '{
+    method: "DELETE",
+    headers: {
+      Authorization: "Bearer " + this.props.token,
     },
- 'Bearer ' .then((res) => {
+  }).then((res) =>
+  {
         if (res.status !== 200 && res.status !== 201) {
           throw new Error("Deleting a post failed!");
         }
