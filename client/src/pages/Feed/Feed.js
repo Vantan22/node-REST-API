@@ -186,7 +186,7 @@ class Feed extends Component {
     this.setState({ status: value });
   };
 
-  deletePostHandle'http://localhost:8080/feed/post/'e({ postsLoading: true })'DELETE'h("http://localhost:8080/feed/post/" +'Bearer '{
+deletePostHand'http://localhost:8080/feed/post/'ate({postsLoading: true})'DELETE'h("http://localhost:8080/feed/post/" +'Bearer '{
     method: "DELETE",
     headers: {
       Authorization: "Bearer " + this.props.token,
