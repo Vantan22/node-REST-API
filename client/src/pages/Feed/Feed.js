@@ -53,26 +53,30 @@ class Feed extends Component {
       page--;
       this.setState({ postPage: page });
     }
-    fetch("http://localhost:8080/feed/posts?page=" + page)
-      .then((res) => {
-        if (res.status !== 200) {
-          throw new Error("Failed to fetch posts.");
-        }
-        return res.json();
-      })
-      .then((resData) => {
-        this.setState({
-          posts: resData.posts.map((post) => {
-            return {
-              ...post,
-              imagePath: post.imageUrl,
-            };
-          }),
-          totalPosts: resData.totalItems,
-          postsLoading: false,
-        });
-      })
-      .catch(this.catchError);
+  fetch("http://localhost:8080/feed/posts?page=" + page, {
+    headers: {
+      Authorization: "Bearer " + this.props.token,
+    },
+  })
+    .then((res) => {
+      if (res.status !== 200) {
+        throw new Error("Failed to fetch posts.");
+      }
+      return res.json();
+    })
+    .then((resData) => {
+      this.setState({
+        posts: resData.posts.map((post) => {
+          return {
+            ...post,
+            imagePath: post.imageUrl,
+          };
+        }),
+        totalPosts: resData.totalItems,
+        postsLoading: false,
+      });
+    })
+    .catch(this.catchError);
   };
 
   statusUpdateHandler = (event) => {
@@ -184,8 +188,10 @@ class Feed extends Component {
 
   deletePostHandler = (postId) => {
     this.setState({ postsLoading: true });
-    fetch("http://localhost:8080/feed/post/" + postId, { method: "DELETE" })
-      .then((res) => {
+  fetch("http://localhost:8080/feed/post/" + p'http://localhost:8080/feed/post/' headers: {
+      Authori'DELETE'"Bearer " + this.props.token,
+    },
+ 'Bearer ' .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
           throw new Error("Deleting a post failed!");
         }
